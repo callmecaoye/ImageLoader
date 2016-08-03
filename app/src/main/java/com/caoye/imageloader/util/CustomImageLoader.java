@@ -18,6 +18,7 @@ import java.util.concurrent.Semaphore;
 
 /**
  * Created by admin on 8/1/16.
+ * This class is a custom ImageLoader
  */
 public class CustomImageLoader {
     /**

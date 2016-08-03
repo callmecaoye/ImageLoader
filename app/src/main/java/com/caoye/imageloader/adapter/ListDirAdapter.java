@@ -46,6 +46,9 @@ public class ListDirAdapter extends ArrayAdapter<ImageFolder> {
         // Reset
         viewHolder.mImgView.setImageResource(R.drawable.picture_no);
 
+        /**
+         * CustomImageLoader to load images
+         */
         CustomImageLoader.getInstance().loadImage(folder.getFirstImagePath(), viewHolder.mImgView);
         viewHolder.mDirCount.setText(folder.getCount() + "");
         viewHolder.mDirName.setText(folder.getName());
