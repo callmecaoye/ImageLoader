@@ -55,14 +55,13 @@ public class ImageAdapter extends BaseAdapter {
 
         int maxMemory = (int) Runtime.getRuntime().maxMemory();
         int cacheMemory = maxMemory / 8;
-        System.out.println(cacheMemory);
 
         ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(context)
                 .threadPriority(Thread.NORM_PRIORITY - 2)
                 .memoryCacheExtraOptions(mScreenWidth / 3, mScreenHeight)
                 .threadPoolSize(3)
                 .denyCacheImageMultipleSizesInMemory()
-                .memoryCacheSize(cacheMemory * 1024 * 1024)
+                .memoryCacheSize(cacheMemory)
                 .tasksProcessingOrder(QueueProcessingType.LIFO)
                 .defaultDisplayImageOptions(DisplayImageOptions.createSimple())
                 .build();
