@@ -10,6 +10,7 @@ Main Functions: </br>
 6. Using Semaphore to control ThreadPool </br>
 7. Realizing LIFO to load images by Task, TaskQueue </br>
 8. Using handler to communicate between threads </br>
+9. Using convertView + ViewHoloder for GridView, ListView reuse </br>
 </br>
 TO DO: Android-Universal-Image-Loader, Picasso, Fresco, Glide
 
