@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.caoye.imageloader.R;
 import com.caoye.imageloader.bean.ImageFolder;
-import com.caoye.imageloader.util.ImageLoader;
+import com.caoye.imageloader.util.CustomImageLoader;
 
 import java.util.List;
 
@@ -46,7 +46,7 @@ public class ListDirAdapter extends ArrayAdapter<ImageFolder> {
         // Reset
         viewHolder.mImgView.setImageResource(R.drawable.picture_no);
 
-        ImageLoader.getInstance().loadImage(folder.getFirstImagePath(), viewHolder.mImgView);
+        CustomImageLoader.getInstance().loadImage(folder.getFirstImagePath(), viewHolder.mImgView);
         viewHolder.mDirCount.setText(folder.getCount() + "");
         viewHolder.mDirName.setText(folder.getName());
 

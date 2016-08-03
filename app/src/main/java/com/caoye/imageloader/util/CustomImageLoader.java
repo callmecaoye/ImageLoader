@@ -8,12 +8,10 @@ import android.os.Message;
 import android.util.DisplayMetrics;
 import android.util.LruCache;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
 import android.widget.ImageView;
 
 import java.lang.reflect.Field;
 import java.util.LinkedList;
-import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Semaphore;
@@ -21,26 +19,26 @@ import java.util.concurrent.Semaphore;
 /**
  * Created by admin on 8/1/16.
  */
-public class ImageLoader {
+public class CustomImageLoader {
     /**
-     * Singleton pattern for ImageLoader instance
+     * Singleton pattern for CustomImageLoader instance
      */
-    private static ImageLoader mInstance;
-    public static ImageLoader getInstance() {
+    private static CustomImageLoader mInstance;
+    public static CustomImageLoader getInstance() {
         if (mInstance == null) {
-            synchronized (ImageLoader.class) {
+            synchronized (CustomImageLoader.class) {
                 if (mInstance == null) {
-                    mInstance = new ImageLoader(DEFAULT_THREAD_COUNT, Type.LIFO);
+                    mInstance = new CustomImageLoader(DEFAULT_THREAD_COUNT, Type.LIFO);
                 }
             }
         }
         return mInstance;
     }
-    public static ImageLoader getInstance(int threadCount, Type type) {
+    public static CustomImageLoader getInstance(int threadCount, Type type) {
         if (mInstance == null) {
-            synchronized (ImageLoader.class) {
+            synchronized (CustomImageLoader.class) {
                 if (mInstance == null) {
-                    mInstance = new ImageLoader(threadCount, type);
+                    mInstance = new CustomImageLoader(threadCount, type);
                 }
             }
         }
@@ -61,7 +59,7 @@ public class ImageLoader {
     private Semaphore mSemaphorePoolThreadHandler = new Semaphore(0);
     private Semaphore mSemaphoreThreadPool;
 
-    private ImageLoader(int threadCount, Type type) {
+    private CustomImageLoader(int threadCount, Type type) {
         init(threadCount, type);
     }
 
@@ -277,7 +275,7 @@ public class ImageLoader {
      * @return
      */
     private int calculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {
-        // actual size
+        // actual size from first decode
         int height = options.outHeight;
         int width = options.outWidth;
 

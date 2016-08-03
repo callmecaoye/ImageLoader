@@ -12,7 +12,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.caoye.imageloader.R;
-import com.caoye.imageloader.util.ImageLoader;
+import com.caoye.imageloader.util.CustomImageLoader;
 
 import java.io.File;
 import java.util.HashSet;
@@ -75,7 +75,7 @@ public class ImageAdapter extends BaseAdapter {
         viewHolder.mImgView.setColorFilter(null);
         viewHolder.mImgView.setMaxWidth(mScreenWidth / 3);
 
-        ImageLoader.getInstance(3, ImageLoader.Type.LIFO).
+        CustomImageLoader.getInstance(3, CustomImageLoader.Type.LIFO).
                 loadImage(parentPath + File.separator + imgList.get(i), viewHolder.mImgView);
 
         final String filePath = parentPath + File.separator + imgList.get(i);
