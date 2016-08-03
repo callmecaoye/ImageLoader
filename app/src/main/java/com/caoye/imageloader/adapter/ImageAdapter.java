@@ -11,8 +11,13 @@ import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
+import com.caoye.imageloader.MainActivity;
 import com.caoye.imageloader.R;
 import com.caoye.imageloader.util.CustomImageLoader;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 
 import java.io.File;
 import java.util.HashSet;
@@ -29,7 +34,7 @@ public class ImageAdapter extends BaseAdapter {
     private String parentPath = null;
     private LayoutInflater mInflater;
 
-    private int mScreenWidth;
+    private int mScreenWidth, mScreenHeight;
 
     public ImageAdapter(Context context, List<String> data, String dirPath) {
         this.imgList = data;
@@ -40,7 +45,30 @@ public class ImageAdapter extends BaseAdapter {
         DisplayMetrics outMetrics = new DisplayMetrics();
         wm.getDefaultDisplay().getMetrics(outMetrics);
         mScreenWidth = outMetrics.widthPixels;
+        mScreenHeight = outMetrics.heightPixels;
+
+        initImageLoader(context);
     }
+
+    private void initImageLoader(Context context) {
+        //ImageLoaderConfiguration configuration=ImageLoaderConfiguration.createDefault(this);
+
+        int maxMemory = (int) Runtime.getRuntime().maxMemory();
+        int cacheMemory = maxMemory / 8;
+        System.out.println(cacheMemory);
+
+        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(context)
+                .threadPriority(Thread.NORM_PRIORITY - 2)
+                .memoryCacheExtraOptions(mScreenWidth / 3, mScreenHeight)
+                .threadPoolSize(3)
+                .denyCacheImageMultipleSizesInMemory()
+                .memoryCacheSize(cacheMemory * 1024 * 1024)
+                .tasksProcessingOrder(QueueProcessingType.LIFO)
+                .defaultDisplayImageOptions(DisplayImageOptions.createSimple())
+                .build();
+        ImageLoader.getInstance().init(config);
+    }
+
     @Override
     public int getCount() {
         return imgList.size();
@@ -75,10 +103,25 @@ public class ImageAdapter extends BaseAdapter {
         viewHolder.mImgView.setColorFilter(null);
         viewHolder.mImgView.setMaxWidth(mScreenWidth / 3);
 
-        CustomImageLoader.getInstance(3, CustomImageLoader.Type.LIFO).
-                loadImage(parentPath + File.separator + imgList.get(i), viewHolder.mImgView);
+        final String filePath = "file://" + parentPath + File.separator + imgList.get(i);
+        /**
+         * CustomImageLoader to load images
 
-        final String filePath = parentPath + File.separator + imgList.get(i);
+        CustomImageLoader.getInstance(3, CustomImageLoader.Type.LIFO).
+                loadImage(filePath, viewHolder.mImgView);
+         */
+
+        /**
+         * UIL to load images
+         */
+        DisplayImageOptions options=new DisplayImageOptions.Builder()
+                .showImageOnLoading(R.drawable.picture_no)
+                .cacheInMemory(true)
+                .build();
+        ImageLoader.getInstance().displayImage(filePath,
+                viewHolder.mImgView, options);
+
+
         viewHolder.mImgView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
