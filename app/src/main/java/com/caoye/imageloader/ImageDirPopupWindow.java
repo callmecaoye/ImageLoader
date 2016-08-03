@@ -85,6 +85,6 @@ public class ImageDirPopupWindow extends PopupWindow {
         DisplayMetrics outMetrics = new DisplayMetrics();
         wm.getDefaultDisplay().getMetrics(outMetrics);
         mWidth = outMetrics.widthPixels;
-        mHeight = (int) (outMetrics.heightPixels * 0.7);
+        mHeight = (int) (outMetrics.heightPixels * 0.6);
     }
 }

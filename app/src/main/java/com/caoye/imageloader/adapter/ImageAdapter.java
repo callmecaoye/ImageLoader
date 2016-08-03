@@ -107,14 +107,17 @@ public class ImageAdapter extends BaseAdapter {
         viewHolder.mImgView.setColorFilter(null);
         viewHolder.mImgView.setMaxWidth(mScreenWidth / 3);
 
-        final String filePath = "file://" + parentPath + File.separator + imgList.get(i);
+
         /**
          * CustomImageLoader to load images
 
+        final String filePath = parentPath + File.separator + imgList.get(i);
         CustomImageLoader.getInstance(3, CustomImageLoader.Type.LIFO).
                 loadImage(filePath, viewHolder.mImgView);
          */
 
+
+        final String filePath = "file://" + parentPath + File.separator + imgList.get(i);
         /**
          * UIL to load images
 
@@ -128,21 +131,23 @@ public class ImageAdapter extends BaseAdapter {
 
         /**
          * Picasso to load images
-
+         */
         Picasso.with(context)
                 .load(filePath)
                 .placeholder(R.drawable.picture_no)
                 .error(R.drawable.picture_no)
                 .into(viewHolder.mImgView);
-         */
+
 
         /**
          * Glide to load images
-         */
+
         Glide.with(context)
                 .load(filePath)
                 .placeholder(R.drawable.picture_no)
                 .into(viewHolder.mImgView);
+         */
+
 
         viewHolder.mImgView.setOnClickListener(new View.OnClickListener() {
             @Override
