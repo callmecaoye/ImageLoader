@@ -146,7 +146,7 @@ public class ImageAdapter extends BaseAdapter {
         return convertView;
     }
 
-    private class ViewHolder {
+    static class ViewHolder {
         ImageView mImgView;
         ImageButton mSelectBtn;
     }

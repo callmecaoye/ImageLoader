@@ -56,7 +56,7 @@ public class ListDirAdapter extends ArrayAdapter<ImageFolder> {
         return convertView;
     }
 
-    private class ViewHolder {
+    static class ViewHolder {
         ImageView mImgView;
         TextView mDirName;
         TextView mDirCount;
