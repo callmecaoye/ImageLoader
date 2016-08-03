@@ -11,6 +11,6 @@ Main Functions: </br>
 7. Realizing LIFO to load images by Task, TaskQueue </br>
 8. Using handler to communicate between threads </br>
 9. Using convertView + ViewHoloder for GridView, ListView reuse </br>
-</br>
-TO DO: Android-Universal-Image-Loader, Picasso, Fresco, Glide
+10. Implement image load in ImageAdapter with CustomImageLoader, Android-Universal-Image-Loader, Picasso and Glide </br>
+
 
