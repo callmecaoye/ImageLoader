@@ -11,6 +11,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.caoye.imageloader.MainActivity;
 import com.caoye.imageloader.R;
 import com.caoye.imageloader.util.CustomImageLoader;
@@ -18,6 +19,7 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
+import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.util.HashSet;
@@ -36,9 +38,12 @@ public class ImageAdapter extends BaseAdapter {
 
     private int mScreenWidth, mScreenHeight;
 
+    private Context context;
+
     public ImageAdapter(Context context, List<String> data, String dirPath) {
         this.imgList = data;
         this.parentPath = dirPath;
+        this.context = context;
         mInflater = LayoutInflater.from(context);
 
         WindowManager wm = (WindowManager) context.getSystemService(context.WINDOW_SERVICE);
@@ -112,14 +117,32 @@ public class ImageAdapter extends BaseAdapter {
 
         /**
          * UIL to load images
-         */
+
         DisplayImageOptions options=new DisplayImageOptions.Builder()
                 .showImageOnLoading(R.drawable.picture_no)
                 .cacheInMemory(true)
                 .build();
         ImageLoader.getInstance().displayImage(filePath,
                 viewHolder.mImgView, options);
+         */
 
+        /**
+         * Picasso to load images
+
+        Picasso.with(context)
+                .load(filePath)
+                .placeholder(R.drawable.picture_no)
+                .error(R.drawable.picture_no)
+                .into(viewHolder.mImgView);
+         */
+
+        /**
+         * Glide to load images
+         */
+        Glide.with(context)
+                .load(filePath)
+                .placeholder(R.drawable.picture_no)
+                .into(viewHolder.mImgView);
 
         viewHolder.mImgView.setOnClickListener(new View.OnClickListener() {
             @Override
