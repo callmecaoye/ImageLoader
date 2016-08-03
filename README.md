@@ -13,4 +13,9 @@ Main Functions: </br>
 9. Using convertView + ViewHoloder for GridView, ListView reuse </br>
 10. Implement image load in ImageAdapter with CustomImageLoader, Android-Universal-Image-Loader, Picasso and Glide </br>
 
+## Screenshots
+<img src="https://github.com/sosa-sang/ImageLoader/blob/master/Screenshots/GridView.png" width="40%" height="40%" />
+<img src="https://github.com/sosa-sang/ImageLoader/blob/master/Screenshots/PopupWindow.png" width="40%" height="40%" />
+
+
 
